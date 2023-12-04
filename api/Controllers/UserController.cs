@@ -1,6 +1,5 @@
 namespace api.Controllers
 {
-
     public class UserController : BaseApiController
     {
         private readonly IUserRepository _userRepository;

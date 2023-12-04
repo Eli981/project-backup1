@@ -1,20 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Account } from '../../models/account.model';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class signupComponent {
+export class signupComponent implements OnDestroy {
 
-  public userRes: Account | undefined;
+  userRes: Account | undefined;
   globAccount: Account | undefined;
+  subscribed : Subscription | undefined;
 
   constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
+  }
+  
+  ngOnDestroy(): void {
+
+  this.subscribed?.unsubscribe;
+  
   }
 
   userFg = this.fb.group({ // formGroup

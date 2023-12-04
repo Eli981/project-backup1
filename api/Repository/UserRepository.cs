@@ -11,7 +11,6 @@ public class UserRepository : IUserRepository
         _collection = database.GetCollection<User>(_collectionName);
     }
 
-
     public async Task<LoginReturnDto?> LoginAsync(LoginDto userInput, CancellationToken cancellationToken)
     {
         var doesUserExist = await _collection.Find<User>(user =>
@@ -40,11 +39,15 @@ public class UserRepository : IUserRepository
 
     public async Task<ActionResult<UpdateResult>> UpdateById(string userId, RegisterDto userInput, CancellationToken cancellationToken)
     {
+        // using var hmac = new HMACSHA512();
+
         var updateAccount = Builders<User>.Update
         .Set((User doc) => doc.Email, userInput.Email)
         .Set(doc => doc.UserName, userInput.UserName);
-        // .Set(doc => doc.Password, userInput.Password)
-        // .Set(doc => doc.confirmPassword, userInput.ConfirmPassword);
+        //   PasswordHash: hmac.ComputeHash(Encoding.UTF8.GetBytes(userInput.Password)),
+        // .Set(doc => hmac.ComputeHash(Encoding.UTF8.GetBytes(userInput.Password)));
+        //   .PasswordSalt: hmac.Key
+        // .Set(doc => doc.PasswordSalt, passwordSalt);
 
         return await _collection.UpdateOneAsync<User>(doc => doc.Id == userId, updateAccount);
     }
