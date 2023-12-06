@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map, observable } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Account } from '../models/account.model';
+import { Account, Login } from '../models/account.model';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,25 +14,40 @@ currentUser$= this.currentUserSource.asObservable();
 
   constructor(private http: HttpClient , private router :Router) { }
 
-  registerUser(userInput:Account): Observable<Account |null > {
-  return this.http.post < Account > ('http://localhost:5000/api/account/register',userInput).pipe(
+  registerUser(userInput:Account): Observable<Login |null > {
+  return this.http.post < Login > ('http://localhost:5000/api/account/register',userInput).pipe(
   map(userRes => {
 if ( userRes ){
 
-  this.setCurrentUser(userRes);
-  this.router.navigateByUrl('/');
+  this.router.navigateByUrl('home');
+
   return userRes;
   }
-  return null;
-})
-  );
-  
-  }
-  setCurrentUser(user: Account): void {
-    this.currentUserSource.next(user);
-    
-    localStorage.setItem('user', JSON.stringify(user));
-  }
-}  
 
-//az service baraye sepraion of consernse esttefade mishavad.. 
+  return null;
+}));
+  }
+
+  loginUser(userInput: User):Observable<Login| null>{
+
+    return this.http.post<Login>('http://localhost:5000/api/User/login-user',userInput).pipe(
+        map(login => {
+          if (login){
+          console.log(login)
+          
+          this.router.navigateByUrl('home');
+          return login;
+            }
+    return null;
+  }));
+}
+
+
+logoutUser():void{
+  this.currentUserSource.next(null);
+  
+  localStorage.removeItem('user')
+  
+  this.router.navigateByUrl('/login');
+}
+}

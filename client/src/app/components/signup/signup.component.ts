@@ -13,11 +13,10 @@ import { AccountService } from 'src/app/services/account.service';
 })
 export class signupComponent implements OnDestroy {
 
-  userRes: Account | undefined;
-  globAccount: Account | undefined;
   subscribed : Subscription | undefined;
+  apiErrorMessage : string | undefined;
 
-  constructor(private accountService : AccountService, private fb: FormBuilder, private http: HttpClient, private router: Router) {
+  constructor(private accountService : AccountService, private fb: FormBuilder) {
   }
   
   ngOnDestroy(): void {
@@ -51,7 +50,7 @@ export class signupComponent implements OnDestroy {
 
 
 
-  registerUser(): void {
+  register(): void {
 
     let signup: Account = {
 
@@ -62,7 +61,8 @@ export class signupComponent implements OnDestroy {
     }
 
     this.accountService.registerUser(signup).subscribe({
-      next :signup => console.log(signup)
+      next :signup => console.log(signup),
+      error:err => this.apiErrorMessage = err.error
     })
 }
 }

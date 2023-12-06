@@ -1,12 +1,21 @@
 <body>
     <form [formGroup]="userFg" class="example-form">
+          
+      
+    <mat-form-field class="example-full-width">
+      <mat-label>نام کاربری</mat-label>
+      <input formControlName="usernameCtrl" matInput placeholder="Reza,..." value="">
+    </mat-form-field>
+
       <mat-form-field class="example-full-width">
-        <mat-label>نام کاربری یا ایمیل  </mat-label>
-        <input formControlName="emailCtrl" matInput placeholder="Reza,..." value="">
+        <mat-label> ایمیل </mat-label>
+        <input formControlName="emailCtrl" matInput placeholder="reza@gmail.com,..." value="">
+      
       </mat-form-field>
       <mat-form-field class="example-full-width">
+       
         <mat-label>رمز عبور</mat-label>
-        <input formControlName="passwordCtrl" type="password" matInput placeholder="reza@gmail.com,..." value="">
+        <input formControlName="passwordCtrl" type="password" matInput placeholder="******" value="">
       </mat-form-field>
       
       <button mat-raised-button color="primary" (click)="logIn()">ورود به حساب کاربری</button>

@@ -10,61 +10,61 @@ img {
     width: 120px;
 }
 
-// main {
-//     display: flex;
-//     flex-direction: column;
-//     text-align: center;
+main {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 
-//     h1 {
-//         color: white;
-//         text-align: center;
-//     }
+    h1 { 
+        color: white;
+        text-align: center;
+    }
 
-//     .info * {
-//         background-color: black;
-//         color: blue;
-//         font-size: 1.5rem;
-//     }
-// }
+    .info * {
+        background-color: black;
+        color: blue;
+        font-size: 1.5rem;
+    }
+}
 
-// main * {
-//     border-radius: 5rem;
+main * {
+    border-radius: 5rem;
 
-// }
+}
 
-// footer {
-//     display: flex;
-//     text-align: center;
-//     text-decoration: none;
-//     font-size: 1.2rem;
-//     max-width: 100vw;
+footer {
+    display: flex;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.2rem;
+    max-width: 100vw;
 
 
-//     .leftbox {
-//         background-color: white;
-//         color: gray;
-//         justify-content: center;
-//         flex-wrap: wrap;
-//     }
+    .leftbox {
+        background-color: white;
+        color: gray;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
 
-//     .middlewbox {
-//         background-color: white;
-//         color: gray;
-//         flex-wrap: wrap;
+    .middlewbox {
+        background-color: white;
+        color: gray;
+        flex-wrap: wrap;
 
-//     }
+    }
 
-//     .rightbox {
-//         background-color: rgb(255, 255, 255);
-//         color: gray;
-//         flex-wrap: wrap;
+    .rightbox {
+        background-color: rgb(255, 255, 255);
+        color: gray;
+        flex-wrap: wrap;
 
-//     }
-// }
+    }
+}
 
-// footer * {
-//     border-radius: 1rem;
-//     flex: 1;
-//     margin: 0.2rem;
-//     list-style: none;
-// }
+footer * {
+    border-radius: 1rem;
+    flex: 1;
+    margin: 0.2rem;
+    list-style: none;
+}

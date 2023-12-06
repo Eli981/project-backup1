@@ -1,17 +1,69 @@
 <mat-toolbar color="primary">
-    <div>
+     <div>
         <button mat-button routerLink="home"> آکواتک</button>
-        <button mat-button [matMenuTriggerFor]="pool">استخر</button>
+        <!-- <button mat-button [matMenuTriggerFor]="pool">استخر</button>
         <button mat-button [matMenuTriggerFor]="sauna">سونا</button>
         <button mat-button [matMenuTriggerFor]="jaccuzzi">جکوزی</button>
         <button mat-button [matMenuTriggerFor]="aquawater">تصفیه آب</button>
         <button mat-button [matMenuTriggerFor]="chemical">مواد شیمیایی</button>
-        <button mat-button [matMenuTriggerFor]="accessorise">لوازم جانبی</button>
-    </div>
+        <button mat-button [matMenuTriggerFor]="accessorise">لوازم جانبی</button> -->
+     </div>
 
-    <div>
-        <button mat-button routerLink="sign-up">ثبت نام </button>
-        <button mat-button routerLink="log-in"> ورود </button>
+<section class="middle">
+
+<button *ngIf="user; else loginRegisterSection" [mat-menu-trigger-for]="appMenu" class="menu-button"
+ mat-mini-fab>
+<span>{{user.email[0] |titlecase}}</span>
+</button>
+
+<ng-template #loginRegisterSection>
+    <button  routerLink="sign-up">ثبت نام </button>
+    <button  routerLink="log-in"> ورود </button>
+</ng-template>
+
+ <mat-menu #appMenu [class] = "'mat-menu'">
+
+ <div *ngIf="user" class ="user-info">
+    <div class="profile-image">
+        <p>{{user.email[0]| titlecase}}
+        </p>
+    </div>
+<div>
+<p>{{user.id}}</p>
+<p class = "email">{{user.email}}</p>
+</div>
+</div>
+<mat-divider></mat-divider>
+<mat-list>
+    <mat-list-item>
+        <div routerLink="/" mat-button class="menu-items">
+            <mat-icon>edit_note</mat-icon>
+            Edit Profile
+        </div>
+    </mat-list-item>
+    <mat-list-item [routerLink]="['/member/get-all']" routerLinkActive="router-link-active">
+        <div class="menu-items">
+            <mat-icon>flaky</mat-icon>
+            All Members
+        </div>
+    </mat-list-item>
+    <mat-list-item [routerLink]="['/message/inbox']" routerLinkActive="router-link-active">
+        <div class="menu-items">
+            <mat-icon>assignment_returned</mat-icon>
+            Messages
+        </div>
+    </mat-list-item>
+</mat-list>
+
+<mat-divider></mat-divider>
+<div class="logout">
+    <button mat-raised-button (click)="logout()">Logout</button>
+</div>
+</mat-menu>
+</section>
+</mat-toolbar>
+<!-- </section> -->
+    <!-- <div>
         <button mat-button routerLink="contact-us"> تماس با ما </button>
         <button mat-button routerLink="about-us">درباره ما </button>
         <button mat-button routerLink="peygiri-sefaresh"> پیگیری سفارش </button>
@@ -184,6 +236,6 @@
         <button mat-menu-item>حلقه نجات</button>
         <button mat-menu-item>جلیقه نجات </button>
         <button mat-menu-item>مچ بند </button>
-        <button mat-menu-item>تجهیزات روشنایی </button>
-    </mat-menu>
-</mat-toolbar>
+        <button mat-menu-item>تجهیزات روشنایی </button> -->
+    <!-- </mat-menu> -->
+<!-- </mat-toolbar> -->

@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-login',
@@ -13,11 +14,10 @@ import { Subscription } from 'rxjs';
 export class loginComponent implements OnDestroy
  { 
 
-   accountRes: Login|undefined;
    subscribed: Subscription| undefined;  
-   res :any
+   apiErrorMessage: string |undefined;
   
-  constructor(private fb :FormBuilder , private http:HttpClient , private router: Router) {
+  constructor(private fb :FormBuilder , private accountService : AccountService) {
   }
 
   ngOnDestroy(): void {
@@ -25,42 +25,37 @@ export class loginComponent implements OnDestroy
   }
   
   userFg = this.fb.group({
-    // usernameCtrl:['',[Validators.required, Validators.minLength(3)]],
+    usernameCtrl:['',[Validators.required, Validators.minLength(3)]],
     emailCtrl:['',[Validators.required]],
     passwordCtrl:['',  [Validators.minLength(6), Validators.maxLength(8), Validators.required]] ,
     
   });
   
-  
-  logIn(): void {
 
-    let enter:Login={
-      // username: this.UsernameCtrl.value,
-      email: this.EmailCtrl.value,
-      password:this.PasswordCtrl.value
-    }
-
-    this.subscribed = this.http.post<Login>('http://localhost:5000/api/User/login-user',enter).subscribe(
-      {
-        next: res => {
-          console.log(res)
-          this.accountRes = res
-          this.router.navigateByUrl('');
-
-    }
-  }
-  );
+get UsernameCtrl():FormControl{
+  return this.userFg.get('usernameCtrl') as FormControl;
 }
-
-
-
-// get UsernameCtrl():FormControl{
-//   return this.userFg.get('usernameCtrl') as FormControl;
-// }
  get EmailCtrl():FormControl{
    return this.userFg.get('emailCtrl') as FormControl;   
  }
  get PasswordCtrl():FormControl{
   return this.userFg.get ('passwordCtrl') as FormControl;
  }
-}
+
+
+
+ logIn(): void {
+
+  let login:Login={
+
+    username: this.UsernameCtrl.value,
+    email: this.EmailCtrl.value,
+    password:this.PasswordCtrl.value
+  }
+
+  this.accountService.loginUser(login).subscribe({
+    next :login =>console.log(login),
+    // error:err =>this.apiErrorMessage =err.error
+  })
+  }
+ }
