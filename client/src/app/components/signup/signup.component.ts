@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Account } from '../../models/account.model';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-signup',
@@ -16,7 +17,7 @@ export class signupComponent implements OnDestroy {
   globAccount: Account | undefined;
   subscribed : Subscription | undefined;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
+  constructor(private accountService : AccountService, private fb: FormBuilder, private http: HttpClient, private router: Router) {
   }
   
   ngOnDestroy(): void {
@@ -32,25 +33,8 @@ export class signupComponent implements OnDestroy {
     confirmPasswordCtrl: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]],
   });
 
-  registerUser(): void {
-
-    let signup: Account = {
-
-      username: this.UsernameCtrl.value,
-      email: this.EmailCtrl.value,
-      password: this.PassswordCtrl.value,
-      confirmPassword: this.ConfirmPassword.value
-    }
-
-    this.http.post<Account>('http://localhost:5000/api/Account/register', signup).subscribe(// dar in khat b jaye in khat az service estefade mikonim . edit shavad . <==
-      {
-        next: res => {
-          this.globAccount = res;
-          this.router.navigateByUrl('log-in');
-        }
-      }
-    );
-  }
+ 
+  
 
   get UsernameCtrl(): FormControl {
     return this.userFg.get('usernameCtrl') as FormControl;
@@ -64,4 +48,21 @@ export class signupComponent implements OnDestroy {
   get ConfirmPassword(): FormControl {
     return this.userFg.get('confirmPasswordCtrl') as FormControl;
   }
+
+
+
+  registerUser(): void {
+
+    let signup: Account = {
+
+      username: this.UsernameCtrl.value,
+      email: this.EmailCtrl.value,
+      password: this.PassswordCtrl.value,
+      confirmPassword: this.ConfirmPassword.value
+    }
+
+    this.accountService.registerUser(signup).subscribe({
+      next :signup => console.log(signup)
+    })
+}
 }

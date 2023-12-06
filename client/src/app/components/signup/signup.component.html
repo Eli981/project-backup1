@@ -1,21 +1,37 @@
 <body>
   <form [formGroup]="userFg" class="example-form">
+
     <mat-form-field class="example-full-width">
       <mat-label>نام کاربری</mat-label>
       <input formControlName="usernameCtrl" matInput placeholder="Reza,..." value="">
     </mat-form-field>
+
     <mat-form-field class="example-full-width">
       <mat-label>ایمیل</mat-label>
       <input formControlName="emailCtrl" type="email" matInput placeholder="reza@gmail.com,..." value="">
-    </mat-form-field>
+<mat-error class=" error"
+  *ngIf="EmailCtrl.hasError('required')">این فیلد اجباری میباشد</mat-error>
+  <mat-error
+  *ngIf="EmailCtrl.hasError('pattern')">ایمیل را به درستی وارد نمایید</mat-error>  
+  
+</mat-form-field>
+
     <mat-form-field class="example-full-width">
       <mat-label>رمز عبور</mat-label>
       <input formControlName="passwordCtrl" type="password" matInput placeholder="*****" value="">
+      <mat-error *ngIf="PassswordCtrl.hasError('required')">این فیلد اجباری میباشد</mat-error>
+      <mat-error *ngIf="PassswordCtrl.hasError('minlength')">رمز کوتاه کمتر از 6 کارکتر مجاز نمیباشد</mat-error>
+      <mat-error *ngIf="PassswordCtrl.hasError('maxlength')">پسورد طولانی  بیشتر از 8 کارکتر مجاز نمیباشد </mat-error>
     </mat-form-field>
+
     <mat-form-field class="example-full-width">
       <mat-label>تائید رمز عبور</mat-label>
       <input formControlName="confirmPasswordCtrl" type="password" matInput placeholder="*****" value="">
-    </mat-form-field>
+    
+      <mat-error *ngIf="PassswordCtrl.hasError('required')">این فیلد اجباری میباشد</mat-error>
+      <mat-error *ngIf="PassswordCtrl.hasError('minlength')">رمز کوتاه کمتر از 6 کارکتر مجاز نمیباشد</mat-error>
+      <mat-error *ngIf="PassswordCtrl.hasError('maxlength')">پسورد طولانی  بیشتر از 8 کارکتر مجاز نمیباشد </mat-error></mat-form-field>
+
 
     <button mat-raised-button color="primary" (click)="registerUser()">ثبت نام</button>
   </form>
