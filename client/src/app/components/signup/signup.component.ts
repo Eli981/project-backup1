@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Account } from '../../models/account.model';
+import { RegisterUser } from '../../models/account.model';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AccountService } from 'src/app/services/account.service';
@@ -13,16 +13,16 @@ import { AccountService } from 'src/app/services/account.service';
 })
 export class signupComponent implements OnDestroy {
 
-  subscribed : Subscription | undefined;
-  apiErrorMessage : string | undefined;
+  subscribed: Subscription | undefined;
+  apiErrorMessage: string | undefined;
 
-  constructor(private accountService : AccountService, private fb: FormBuilder) {
+  constructor(private accountService: AccountService, private fb: FormBuilder) {
   }
-  
+
   ngOnDestroy(): void {
 
-  this.subscribed?.unsubscribe;
-  
+    this.subscribed?.unsubscribe;
+
   }
 
   userFg = this.fb.group({ // formGroup
@@ -32,8 +32,8 @@ export class signupComponent implements OnDestroy {
     confirmPasswordCtrl: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]],
   });
 
- 
-  
+
+
 
   get UsernameCtrl(): FormControl {
     return this.userFg.get('usernameCtrl') as FormControl;
@@ -52,7 +52,7 @@ export class signupComponent implements OnDestroy {
 
   register(): void {
 
-    let signup: Account = {
+    let signup: RegisterUser = {
 
       username: this.UsernameCtrl.value,
       email: this.EmailCtrl.value,
@@ -61,8 +61,8 @@ export class signupComponent implements OnDestroy {
     }
 
     this.accountService.registerUser(signup).subscribe({
-      next :signup => console.log(signup),
-      error:err => this.apiErrorMessage = err.error
+      next: signup => console.log(signup),
+      error: err => this.apiErrorMessage = err.error
     })
-}
+  }
 }

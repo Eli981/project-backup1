@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import * as core from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { signupComponent } from './components/signup/signup.component';
@@ -7,6 +7,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { PeygiriSefareshComponent } from './components/peygiri-sefaresh/peygiri-sefaresh.component';
 import { loginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { NoAccessComponent } from './components/no-access/no-access.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,10 +17,11 @@ const routes: Routes = [
   { path: 'about-us', component: AboutUsComponent },
   { path: 'peygiri-sefaresh', component: PeygiriSefareshComponent },
   { path: 'log-in', component: loginComponent },
+  { path: 'no-access', component: NoAccessComponent },
   { path: '**', component: NotFoundComponent } // (** =>)LINK TO NOT FOUND
 ];
 
-@NgModule({
+@core.NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })

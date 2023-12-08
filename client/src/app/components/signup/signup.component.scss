@@ -1,14 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    // height: 100vh;
-    // background-image: url(../../../assets/images/swimming-pool.jpg);
-    // background-repeat: no-repeat;
-    // background-position: center;
-    // background-size: cover;
-    // opacity: 1;
- 
-    
+    font-size: 18px;
     .example-form {
         display: flex;
         flex-direction: column;
@@ -19,11 +12,10 @@ body {
     }
     .example-form{
         gap: 2rem;
-        
     }
-    // .mat-form-field{
-    //     font-size: 16px;
-    //     font-style: bold;
+    .mat-form-field{
+        font-size: 16px;
+        font-style: bold;
     
-    //    }
+       }
 }

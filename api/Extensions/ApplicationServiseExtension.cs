@@ -15,6 +15,7 @@ public static class ApplicationServiceExtensions
 
         // get connectionString to the db
         services.AddSingleton<IMongoClient>(serviceProvider =>
+        
         {
             MongoDbSettings uri = serviceProvider.GetRequiredService<IOptions<MongoDbSettings>>().Value;
 

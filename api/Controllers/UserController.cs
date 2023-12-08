@@ -3,16 +3,16 @@ namespace api.Controllers
     public class UserController : BaseApiController
     {
         private readonly IUserRepository _userRepository;
-
-        public UserController(IUserRepository userREpository)
+        public UserController(IUserRepository userRepository)
         {
-            _userRepository = userREpository;
+            _userRepository = userRepository;
         }
 
         [HttpPost("login-user")]
         public async Task<ActionResult<LoginReturnDto?>> Login(LoginDto userInput, CancellationToken cancellationToken)
         {
             LoginReturnDto? loginReturnDto = await _userRepository.LoginAsync(userInput, cancellationToken);
+
             if (loginReturnDto is null)
 
                 return Unauthorized("Invalid");

@@ -1,241 +1,59 @@
 <mat-toolbar color="primary">
-     <div>
-        <button mat-button routerLink="home"> آکواتک</button>
-        <!-- <button mat-button [matMenuTriggerFor]="pool">استخر</button>
-        <button mat-button [matMenuTriggerFor]="sauna">سونا</button>
-        <button mat-button [matMenuTriggerFor]="jaccuzzi">جکوزی</button>
-        <button mat-button [matMenuTriggerFor]="aquawater">تصفیه آب</button>
-        <button mat-button [matMenuTriggerFor]="chemical">مواد شیمیایی</button>
-        <button mat-button [matMenuTriggerFor]="accessorise">لوازم جانبی</button> -->
-     </div>
+    <section class="right">
+        <a routerLink="/" class="brand">
+            <mat-icon>eco</mat-icon>
+            Aquatech
+        </a>
+    </section>
 
-<section class="middle">
+    <section class="left">
+        <button *ngIf="user; else loginRegisterSection" [mat-menu-trigger-for]="appMenu" class="menu-button"
+            mat-mini-fab>
+            <span>{{user.email[0] | titlecase}}</span>
+        </button>
+        <ng-template #loginRegisterSection>
+            <button routerLink="sign-up" mat-raised-button color="accent">Register</button>
+            <button routerLink="log-in" mat-raised-button color="accent">Login</button>
+        </ng-template>
 
-<button *ngIf="user; else loginRegisterSection" [mat-menu-trigger-for]="appMenu" class="menu-button"
- mat-mini-fab>
-<span>{{user.email[0] |titlecase}}</span>
-</button>
+        <mat-menu #appMenu [class]="'mat-menu'">
+            <div *ngIf="user" class="user-info">
+                <div class="profile-image">
+                    <p>
+                        {{user.email[0] | titlecase}}
+                    </p>
+                </div>
+                <div>
+                    <p>{{user.id}}</p>
+                    <p class="email">{{user.email}}</p>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <mat-list>
+                <mat-list-item>
+                    <div routerLink="/" mat-button class="menu-items">
+                        <mat-icon>edit note</mat-icon>
+                        Edit Profile
+                    </div>
+                </mat-list-item>
+                <mat-list-item [routerLink]="['/member/get-all']" routerLinkActive="router-link-active">
+                    <div class="manu-items">
+                        <mat-icon>flaky</mat-icon>
+                        All Members
+                    </div>
+                </mat-list-item>
+                <mat-list-item [routerLink]="['/message/inbox']" routerLink="router-link-active">
+                    <div class="menu-items">
+                        <mat-icon>assignment_returned</mat-icon>
+                        message
+                    </div>
+                </mat-list-item>
+            </mat-list>
 
-<ng-template #loginRegisterSection>
-    <button  routerLink="sign-up">ثبت نام </button>
-    <button  routerLink="log-in"> ورود </button>
-</ng-template>
-
- <mat-menu #appMenu [class] = "'mat-menu'">
-
- <div *ngIf="user" class ="user-info">
-    <div class="profile-image">
-        <p>{{user.email[0]| titlecase}}
-        </p>
-    </div>
-<div>
-<p>{{user.id}}</p>
-<p class = "email">{{user.email}}</p>
-</div>
-</div>
-<mat-divider></mat-divider>
-<mat-list>
-    <mat-list-item>
-        <div routerLink="/" mat-button class="menu-items">
-            <mat-icon>edit_note</mat-icon>
-            Edit Profile
-        </div>
-    </mat-list-item>
-    <mat-list-item [routerLink]="['/member/get-all']" routerLinkActive="router-link-active">
-        <div class="menu-items">
-            <mat-icon>flaky</mat-icon>
-            All Members
-        </div>
-    </mat-list-item>
-    <mat-list-item [routerLink]="['/message/inbox']" routerLinkActive="router-link-active">
-        <div class="menu-items">
-            <mat-icon>assignment_returned</mat-icon>
-            Messages
-        </div>
-    </mat-list-item>
-</mat-list>
-
-<mat-divider></mat-divider>
-<div class="logout">
-    <button mat-raised-button (click)="logout()">Logout</button>
-</div>
-</mat-menu>
-</section>
+            <mat-divider></mat-divider>
+            <div class="logout">
+                <button mat-raised-button (click)="logout()">Logout</button>
+            </div>
+        </mat-menu>
+    </section>
 </mat-toolbar>
-<!-- </section> -->
-    <!-- <div>
-        <button mat-button routerLink="contact-us"> تماس با ما </button>
-        <button mat-button routerLink="about-us">درباره ما </button>
-        <button mat-button routerLink="peygiri-sefaresh"> پیگیری سفارش </button>
-    </div>
-    <mat-menu #pool="matMenu">
-        <button mat-menu-item [matMenuTriggerFor]="filterSheni">فیلترشنی</button>
-        <button mat-menu-item [matMenuTriggerFor]="filterDiatomic">فیلتر دیاتومه</button>
-        <button mat-menu-item>فیلتر کارترجی</button>
-        <button mat-menu-item>فیلتر فلزی</button>
-        <button mat-menu-item [matMenuTriggerFor]="pump"> پمپ تصفیه</button>
-        <button mat-menu-item [matMenuTriggerFor]="SportEquipment">تجهیزات ورزشی </button>
-        <button mat-menu-item [matMenuTriggerFor]="warmEquipment">تجهیزات گرمایشی آب</button>
-        <button mat-menu-item [matMenuTriggerFor]="healthEquipment"> تجهیزات آب درمانی</button>
-        <button mat-menu-item [matMenuTriggerFor]="cleanEquipment">تجهیزات ضدعفونی کننده آب</button>
-        <button mat-menu-item [matMenuTriggerFor]="accesories">لوازم جانبی استخر</button>
-
-        <mat-menu #filterSheni="matMenu">
-            <button mat-menu-item routerLink="emaux-filter">Emaux</button>
-            <button mat-menu-item>Hayward</button>
-            <button mat-menu-item>Hiwater</button>
-            <button mat-menu-item>Mr.ppol</button>
-            <button mat-menu-item>Cipu</button>
-            <button mat-menu-item>Laswim</button>
-            <button mat-menu-item>Atlas pool</button>
-            <button mat-menu-item>Mega pool</button>
-            <button mat-menu-item>Aquax</button>
-        </mat-menu>
-
-        <mat-menu #filterDiatomic="matMenu">
-            <button mat-menu-item>Hayward</button>
-            <button mat-menu-item>Emaux</button>
-            <button mat-menu-item>Cipu</button>
-        </mat-menu>
-
-        <mat-menu #pump="matMenu">
-            <button mat-menu-item>Emaux</button>
-            <button mat-menu-item>Leo</button>
-            <button mat-menu-item>Hiwater</button>
-            <button mat-menu-item>Hayward</button>
-            <button mat-menu-item>Cipu</button>
-            <button mat-menu-item>Pool Star</button>
-            <button mat-menu-item>Hyper pool</button>
-            <button mat-menu-item>Atlas pool</button>
-            <button mat-menu-item>Laswim</button>
-        </mat-menu>
-
-        <mat-menu #SportEquipment="matMenu">
-            <button mat-menu-item>توپ</button>
-            <button mat-menu-item>وزنه</button>
-            <button mat-menu-item>میله</button>
-            <button mat-menu-item>کش</button>
-        </mat-menu>
-
-        <mat-menu #warmEquipment="matMenu">
-            <button mat-menu-item>مبدل فلنچی</button>
-            <button mat-menu-item>مبدل جوشی</button>
-        </mat-menu>
-        <mat-menu #healthEquipment="matMenu">
-            <button mat-menu-item>توپ</button>
-            <button mat-menu-item>وزنه</button>
-            <button mat-menu-item>میله</button>
-            <button mat-menu-item>کش</button>
-        </mat-menu>
-
-        <mat-menu #cleanEquipment="matMenu">
-            <button mat-menu-item [matMenuTriggerFor]="cholorineLine">کلرزن خطی </button>
-            <button mat-menu-item [matMenuTriggerFor]="cholorineSalt">کلرزن نمکی</button>
-        </mat-menu>
-
-        <mat-menu #cholorineLine="matMenu">
-            <button mat-menu-item>Emaux</button>
-            <button mat-menu-item>Hiwater</button>
-            <button mat-menu-item>Mr.pool</button>
-            <button mat-menu-item>Pool Star</button>
-            <button mat-menu-item>Martini</button>
-            <button mat-menu-item>Kral</button>
-            <button mat-menu-item>Hayward</button>
-        </mat-menu>
-
-        <mat-menu #cholorineSalt="matMenu">
-            <button mat-menu-item>Emaux</button>
-            <button mat-menu-item>Cipu</button>
-            <button mat-menu-item>Emaux</button>
-            <button mat-menu-item>Laswim</button>
-        </mat-menu>
-
-        <mat-menu #accesories="matMenu">
-            <button mat-menu-item> تخت و صندلی کنار استخر </button>
-            <button mat-menu-item>روکش استخر </button>
-            <button mat-menu-item> کاشی و سرامیک</button>
-            <button mat-menu-item>سیلیس کریستال و همدان </button>
-            <button mat-menu-item>نردبان و دستگیره </button>
-            <button mat-menu-item> کفشور استخر</button>
-            <button mat-menu-item>رطوبت گیر </button>
-            <button mat-menu-item>سشوار و دست خشک کن </button>
-            <button mat-menu-item>لوله و اتصالات </button>
-            <button mat-menu-item>دما سنج آب </button>
-            <button mat-menu-item>اسکیمر </button>
-            <button mat-menu-item>آینما </button>
-            <button mat-menu-item>جارو اتوماتیک و دستی</button>
-            <button mat-menu-item>دایو و سرسره </button>
-        </mat-menu>
-
-    </mat-menu>
-
-    <mat-menu #sauna="matMenu">
-        <button mat-menu-item [matMenuTriggerFor]="heater">هیتر سونا برقی</button>
-        <button mat-menu-item>کوره سونا گازی</button>
-        <button mat-menu-item>دیگ بخار گازی </button>
-        <button mat-menu-item>دیگ بخار برقی</button>
-        <button mat-menu-item [matMenuTriggerFor]="accessoriesSauna"> لوازم جانبی سونا</button>
-    </mat-menu>
-
-    <mat-menu #heater="matMenu">
-        <button mat-menu-item>Emaux</button>
-        <button mat-menu-item>Sawo</button>
-        <button mat-menu-item>Hyper</button>
-        <button mat-menu-item>Harvia</button>
-    </mat-menu>
-
-    <mat-menu #accessoriesSauna="matMenu">
-        <button mat-menu-item>سطل و ملاقه</button>
-        <button mat-menu-item>رطوبت سنج</button>
-        <button mat-menu-item>دماسنج</button>
-        <button mat-menu-item>انواع اسانس</button>
-        <button mat-menu-item>ساعت شنی</button>
-        <button mat-menu-item>اکالیپتوس</button>
-        <button mat-menu-item>چراغ سونا </button>
-    </mat-menu>
-
-    <mat-menu #jaccuzzi="matMenu">
-        <button mat-menu-item>وان جکوزی</button>
-        <button mat-menu-item>بلوئر جکوزی </button>
-        <button mat-menu-item>پمپ جکوزی</button>
-    </mat-menu>
-
-    <mat-menu #aquawater="matMenu">
-        <button mat-menu-item>تصفیه آب خانگی </button>
-        <button mat-menu-item>تصفیه آب صنعتی </button>
-        <button mat-menu-item> ممبران صنعتی و خانگی</button>
-        <button mat-menu-item>فیلتر کربنی </button>
-        <button mat-menu-item>هوزینگ استیل و پلاستیکی </button>
-        <button mat-menu-item>کارتریج فیلتر تصفیه </button>
-        <button mat-menu-item>سختی گیر </button>
-    </mat-menu>
-
-    <mat-menu #chemical="matMenu">
-        <button mat-menu-item>قرص کلر</button>
-        <button mat-menu-item>پودر کلر </button>
-        <button mat-menu-item>سولفات آلوم(زاج) </button>
-        <button mat-menu-item>سلیس همدان </button>
-        <button mat-menu-item>اسید استخری</button>
-        <button mat-menu-item>کات کبود </button>
-        <button mat-menu-item>رزین سختی گیر </button>
-        <button mat-menu-item>اسید شستشوی دیواره و کوئل </button>
-        <button mat-menu-item>تست ازن </button>
-        <button mat-menu-item>PH/DPD تست </button>
-        <button mat-menu-item>تست کیت سختی آب </button>
-        <button mat-menu-item>تست اکسیژن آب </button>
-        <button mat-menu-item>تست اکسیژن آب </button>
-        <button mat-menu-item>PH/CL تست </button>
-        <button mat-menu-item>TOS تست </button>
-        <button mat-menu-item>محلول یدکی تست</button>
-        
-    </mat-menu>
-
-    <mat-menu #accessorise="matMenu">
-        <button mat-menu-item>کلاه شنا </button>
-        <button mat-menu-item>عینک شنا </button>
-        <button mat-menu-item>حلقه نجات</button>
-        <button mat-menu-item>جلیقه نجات </button>
-        <button mat-menu-item>مچ بند </button>
-        <button mat-menu-item>تجهیزات روشنایی </button> -->
-    <!-- </mat-menu> -->
-<!-- </mat-toolbar> -->

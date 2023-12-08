@@ -1,6 +1,6 @@
 namespace api.Models;
 
-public record Account(
+public record User(
     [property: BsonId, BsonRepresentation(BsonType.ObjectId)] string? Id,
     string UserName,
     string Email,

@@ -4,16 +4,18 @@ public class UserRepository : IUserRepository
 {
     private const string _collectionName = "customers";
     private readonly IMongoCollection<User>? _collection;
+    private readonly ITokenService _tokenService;
 
-    public UserRepository(IMongoClient client, IMongoDbSettings dbSettings)
+    public UserRepository(IMongoClient client, IMongoDbSettings dbSettings, ITokenService tokenService)
     {
         var database = client.GetDatabase(dbSettings.DatabaseName);
         _collection = database.GetCollection<User>(_collectionName);
+        _tokenService = tokenService;
     }
 
     public async Task<LoginReturnDto?> LoginAsync(LoginDto userInput, CancellationToken cancellationToken)
     {
-        var doesUserExist = await _collection.Find<User>(user =>
+        User doesUserExist = await _collection.Find<User>(user =>
         user.Email == userInput.Email.Trim().ToLower()).FirstOrDefaultAsync(cancellationToken);
 
         if (doesUserExist is null)
@@ -28,8 +30,10 @@ public class UserRepository : IUserRepository
             if (doesUserExist.Id is not null)
             {
                 return new LoginReturnDto(
+                    Id: doesUserExist.Id,
                     UserName: userInput.UserName,
-                    Email: userInput.Email
+                    Email: userInput.Email,
+                    Token: _tokenService.CreateToken(doesUserExist)
                 );
             }
         }

@@ -9,13 +9,13 @@ public static class IdentityServiceExtensions
         if (!string.IsNullOrEmpty(tokenvalue))
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(Options =>
+                .AddJwtBearer(Options =>
             {
                 Options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenvalue)),
-                    ValidateIssuer = true,
+                    ValidateIssuer = false,
                     ValidateAudience = false
                 };
             });

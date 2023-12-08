@@ -6,7 +6,6 @@ public class AccountController : BaseApiController
     public AccountController(IAccountRepository accountRepository)
     {
         _accountRepository = accountRepository;
-        // _tokenService = tokenService;
     }
 
 
@@ -22,7 +21,7 @@ public class AccountController : BaseApiController
             return BadRequest("Email or username already registered");
 
         return loginReturnDto;
-      
+
     }
 
     [HttpDelete("delete/{userId}")]

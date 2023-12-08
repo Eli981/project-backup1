@@ -8,18 +8,18 @@ import { AccountService } from 'src/app/services/account.service';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
- user :User |null |undefined;
+  user: User | null | undefined;
 
- constructor(private accountService :AccountService) {}
-  
- 
+  constructor(private accountService: AccountService) { }
+
+
   ngOnInit(): void {
     this.accountService.currentUser$.subscribe({
-      next:response => this.user = response
+      next: response => this.user = response
     });
   }
 
-  logout():void{
+  logout(): void {
     this.accountService.logoutUser();
   }
 }

@@ -15,12 +15,12 @@ public class TokenService : ITokenService
 
     }
 
-    public string CreateToken(Account account)
+    public string CreateToken(User user)
     {
         _ = _key ?? throw new ArgumentNullException("_key cannot be null", nameof(_key));
 
         var claims = new List<Claim> {
-            new Claim(JwtRegisteredClaimNames.NameId, account.Id!)
+            new Claim(JwtRegisteredClaimNames.NameId, user.Id!)
         };
 
         var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);

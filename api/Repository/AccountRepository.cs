@@ -2,20 +2,19 @@ namespace api.Repository;
 public class AccountRepository : IAccountRepository
 {
   private const string _collectionName = "customers";
-  private readonly IMongoCollection<Account>? _collection;
+  private readonly IMongoCollection<User>? _collection;
 
-  // private readonly ItokenService _tokenService;
+  private readonly ITokenService _tokenService;
 
-
-  public AccountRepository(IMongoClient client, IMongoDbSettings dbSettings)
+  public AccountRepository(IMongoClient client, IMongoDbSettings dbSettings, ITokenService tokenService)
   {
     var database = client.GetDatabase(dbSettings.DatabaseName);
-    _collection = database.GetCollection<Account>(_collectionName);
-    // _tokenService = tokenService;
+    _collection = database.GetCollection<User>(_collectionName);
+    _tokenService = tokenService;
   }
   public async Task<LoginReturnDto?> CreateAsync(RegisterDto userInput, CancellationToken cancellationToken)
   {
-    bool doesUserExist = await _collection.Find<Account>(user =>
+    bool doesUserExist = await _collection.Find<User>(user =>
          user.Email == userInput.Email.ToLower().Trim() &&
          user.UserName == userInput.UserName.ToLower().Trim()).AnyAsync(cancellationToken);
 
@@ -24,7 +23,7 @@ public class AccountRepository : IAccountRepository
 
     using var hmac = new HMACSHA512();
 
-    Account signup = new Account(
+    User signup = new User(
       Id: null,
       UserName: userInput.UserName,
       Email: userInput.Email,
@@ -39,8 +38,10 @@ public class AccountRepository : IAccountRepository
     if (signup.Id is not null)
     {
       LoginReturnDto loginReturnDto = new LoginReturnDto(
+          Id: null,
           UserName: userInput.UserName,
-          Email: userInput.Email
+          Email: userInput.Email,
+          Token: _tokenService.CreateToken(signup)
       );
       return loginReturnDto;
     }

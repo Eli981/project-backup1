@@ -19,7 +19,6 @@ import { MaterialModule } from './module/material.module';
     
     ComponentModule,
     MaterialModule
-   
   ],
   
   providers: [],
