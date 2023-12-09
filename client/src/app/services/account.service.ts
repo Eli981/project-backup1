@@ -35,7 +35,7 @@ export class AccountService {
     return this.http.post<User>('http://localhost:5000/api/user/login-user', userInput).pipe(
       map(login => {
         if (login) {
-          console.log(login)
+          // console.log(login)
           this.setCurrentUser(login);
 
           return login;
