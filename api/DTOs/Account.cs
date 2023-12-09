@@ -32,8 +32,4 @@ namespace api.DTOS
         string Email,
         string Token
     );
-
-
-
-    
 }
