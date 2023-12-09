@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { AboutUsComponent } from '../components/about-us/about-us.component';
 import { ContactUsComponent } from '../components/contact-us/contact-us.component';
 import { FooterComponent } from '../components/footer/footer.component';
-import { HomeComponent } from '../components/home/home.component';
 import { loginComponent } from '../components/login/login.component';
 import { NavigationComponent } from '../components/navigation/navigation.component';
 import { NoAccessComponent } from '../components/no-access/no-access.component';
@@ -16,26 +15,25 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from '../app-routing.module';
 
-const components =[
+const components = [
   signupComponent,
   NavigationComponent,
-  HomeComponent,
   FooterComponent,
   ContactUsComponent,
   AboutUsComponent,
   PeygiriSefareshComponent,
   loginComponent,
   NotFoundComponent,
-  NoAccessComponent,
+  NoAccessComponent
 ];
 
 @NgModule({
   declarations: [
     components
   ],
-  
-imports: [
-    CommonModule, 
+
+  imports: [
+    CommonModule,
 
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -45,10 +43,11 @@ imports: [
     ReactiveFormsModule,
 
   ],
-  exports:[
+  exports: [
     components
   ]
 })
-export class ComponentModule { 
-  
+export class ComponentModule {
+
+  constructor() { }
 }

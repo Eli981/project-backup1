@@ -27,7 +27,7 @@ namespace api.DTOS
     );
 
     public record LoginReturnDto(
-        string Id,
+        string? Id,
         string UserName,
         string Email,
         string Token
