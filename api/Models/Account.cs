@@ -7,4 +7,3 @@ public record User(
     byte[] PasswordSalt,
     byte[] PasswordHash
 );
-
