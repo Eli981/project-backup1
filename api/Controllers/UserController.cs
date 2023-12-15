@@ -1,12 +1,7 @@
 namespace api.Controllers
 {
-    public class UserController : BaseApiController
+    public class UserController(IUserRepository _userRepository) : BaseApiController
     {
-        private readonly IUserRepository _userRepository;
-        public UserController(IUserRepository userRepository)
-        {
-            _userRepository = userRepository;
-        }
 
         [HttpPost("login-user")]
         public async Task<ActionResult<LoginReturnDto?>> Login(LoginDto userInput, CancellationToken cancellationToken)

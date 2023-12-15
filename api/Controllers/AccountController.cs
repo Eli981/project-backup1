@@ -1,12 +1,7 @@
 namespace api.Controllers;
 
-public class AccountController : BaseApiController
+public class AccountController(IAccountRepository _accountRepository) : BaseApiController
 {
-    private readonly IAccountRepository _accountRepository;
-    public AccountController(IAccountRepository accountRepository)
-    {
-        _accountRepository = accountRepository;
-    }
 
 
     [HttpPost("register")]
