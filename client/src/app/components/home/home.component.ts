@@ -1,7 +1,8 @@
-import { Component, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, inject } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { AccountService } from 'src/app/services/account.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -10,10 +11,12 @@ import { AccountService } from 'src/app/services/account.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnDestroy {
-  user: User | null | undefined;
-  subscription: Subscription | undefined
+  userService = inject(UserService);
+  accountService = inject(AccountService);
 
-  constructor(private accountService: AccountService) { }
+  allUsers: User[] | null | undefined;
+  allUsers$: Observable<User[] | null> | undefined; subscription: Subscription | undefined
+
 
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();

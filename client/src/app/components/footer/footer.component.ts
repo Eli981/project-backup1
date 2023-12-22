@@ -1,13 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { AccountService } from 'src/app/services/account.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
+  standalone: true,
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  styleUrls: ['./footer.component.scss'],
+  imports: [CommonModule, MatButtonModule]
 })
 export class FooterComponent {
   userService = inject(UserService);

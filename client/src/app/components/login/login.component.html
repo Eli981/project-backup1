@@ -17,11 +17,11 @@
       <mat-label> ایمیل </mat-label>
       <input formControlName="emailCtrl" placeholder="reza@gmail.com,..." value="">
 
-      @if(emailCtrl.hasError('required')){
+      @if(EmailCtrl.hasError('required')){
       <mat-error>This is requied</mat-error>
       }
 
-      @else if (emailCtrl.hasError('pattern')){
+      @else if (EmailCtrl.hasError('pattern')){
       <mat-error>Enter a valid Email</mat-error>
       }
     </mat-form-field>
@@ -29,14 +29,14 @@
     <mat-form-field class="example-full-width">
       <mat-label>رمز عبور</mat-label>
       <input formControlName="passwordCtrl" type="password" placeholder="******" value="">
-      @if(passwordCtrl.hasError('requierd')){
+      @if(PasswordCtrl.hasError('requierd')){
       <mat-error>This is requied</mat-error>
       }
-      @else if (passwordCtrl.hasError('minLenght')){
+      @else if (PasswordCtrl.hasError('minLenght')){
       <mat-error>t's too short. Min: 7 characters.</mat-error>
       }
 
-      @else if (passwordCtrl.hasError('maxLength')){
+      @else if (PasswordCtrl.hasError('maxLength')){
       <mat-error>t's too short. Min: 8 characters.</mat-error>
       }
     </mat-form-field>

@@ -1,14 +1,23 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Login } from '../../models/account.model';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AccountService } from 'src/app/services/account.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
+  standalone: true,
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule,
+    MatFormFieldModule, MatInputModule, MatButtonModule
+  ]
+
 })
 export class loginComponent implements OnDestroy {
 
