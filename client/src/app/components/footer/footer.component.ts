@@ -19,6 +19,7 @@ export class FooterComponent {
 
   allUsers: User[] | null | undefined;
   allUsers$: Observable<User[] | null> | undefined;
+
   showAllUsers() {
     this.userService.getAllUsers().subscribe({
       next: (users: User[] | null) => this.allUsers = users,
