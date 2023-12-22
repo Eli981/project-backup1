@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { RegisterUser, Login } from '../../models/account.model';
+import { Login } from '../../models/account.model';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AccountService } from 'src/app/services/account.service';
@@ -10,11 +10,16 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class loginComponent {
-  // subscribed: Subscription | undefined;
+export class loginComponent implements OnDestroy {
+
+  subscribed: Subscription | undefined;
   apiErrorMessage: string | undefined;
 
   constructor(private fb: FormBuilder, private accountService: AccountService, private route: Router) { }
+
+  ngOnDestroy(): void {
+    this.subscribed?.unsubscribe();
+  }
 
   userFg: FormGroup = this.fb.group({
     usernameCtrl: ['', [Validators.required, Validators.minLength(3)]],

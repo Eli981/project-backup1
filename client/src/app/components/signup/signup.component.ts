@@ -1,8 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { RegisterUser } from '../../models/account.model';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AccountService } from 'src/app/services/account.service';
 

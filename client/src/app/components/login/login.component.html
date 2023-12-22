@@ -3,22 +3,48 @@
 
     <mat-form-field class="example-full-width">
       <mat-label>نام کاربری</mat-label>
-      <input formControlName="usernameCtrl" matInput placeholder="Reza,..." value="">
+      <input type="username" formControlName="UsernameCtrl" label="Username" placeholder="Reza,...">
+
+      @if(UsernameCtrl.hasError('regiured')){
+      <mat-error>This is requied</mat-error>
+      }
+      @else if (UsernameCtrl.hasError('pattern')){
+      <mat-error>Enter a valid Username</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
       <mat-label> ایمیل </mat-label>
-      <input formControlName="emailCtrl" matInput placeholder="reza@gmail.com,..." value="">
+      <input formControlName="emailCtrl" placeholder="reza@gmail.com,..." value="">
 
+      @if(emailCtrl.hasError('required')){
+      <mat-error>This is requied</mat-error>
+      }
+
+      @else if (emailCtrl.hasError('pattern')){
+      <mat-error>Enter a valid Email</mat-error>
+      }
     </mat-form-field>
+
     <mat-form-field class="example-full-width">
-
       <mat-label>رمز عبور</mat-label>
-      <input formControlName="passwordCtrl" type="password" matInput placeholder="******" value="">
+      <input formControlName="passwordCtrl" type="password" placeholder="******" value="">
+      @if(passwordCtrl.hasError('requierd')){
+      <mat-error>This is requied</mat-error>
+      }
+      @else if (passwordCtrl.hasError('minLenght')){
+      <mat-error>t's too short. Min: 7 characters.</mat-error>
+      }
+
+      @else if (passwordCtrl.hasError('maxLength')){
+      <mat-error>t's too short. Min: 8 characters.</mat-error>
+      }
     </mat-form-field>
 
-    <button mat-raised-button color="primary" >ورود به حساب کاربری</button>
+    <button type="submit" [disabled]="userFg.invalid" color="primary">ورود به حساب کاربری</button>
 
-    <p *ngIf="apiErrorMessage">{{apiErrorMessage}}</p>
+    @if (apiErrorMessage){
+    <p>{{apiErrorMessage}}</p>
+    }
   </form>
 </body>

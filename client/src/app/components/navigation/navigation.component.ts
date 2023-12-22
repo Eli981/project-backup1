@@ -8,6 +8,7 @@ import { AccountService } from 'src/app/services/account.service';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
+
   user: User | null | undefined;
 
   constructor(private accountService: AccountService) { }
